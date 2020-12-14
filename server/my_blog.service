@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 ExecStart=/apps/venv/bin/uwsgi -H /apps/venv --master --processes 4 --threads 2 --http :5000 --manage-script-name --python-path /apps/my_blog --mount /=wsgi:app
-RuntimeDirectory=/apps/my_blog/
+RuntimeDirectory=/apps/my_blog
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
