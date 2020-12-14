@@ -32,7 +32,7 @@ server {
 }
 
 server {
-    listen 80;
+    listen 81;
     server_name erikaambrioso.com;
     server_tokens off;
     charset utf-8;
