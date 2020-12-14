@@ -9,8 +9,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret"  # for WTF-forms and login
 app.config["BLOGGING_URL_PREFIX"] = "/blog"
-app.config["BLOGGING_DISQUS_SITENAME"] = "test"
-app.config["BLOGGING_SITEURL"] = "http://localhost:5000"
+# Leaving this configuration out removes the comment section AND the sponsored ads!
+# app.config["BLOGGING_DISQUS_SITENAME"] = "test" 
+app.config["BLOGGING_SITEURL"] = "https://alexambrioso.com"
 app.config["BLOGGING_SITENAME"] = "My Site"
 app.config["BLOGGING_KEYWORDS"] = ["blog", "meta", "keywords"]
 app.config["FILEUPLOAD_IMG_FOLDER"] = "fileupload"
@@ -72,6 +73,7 @@ def logout():
     logout_user()
     return redirect("/")
 
+# This main function is need to get wsgi.py to work properly.
 def main():
     app.run(debug=True, port=5000)
 

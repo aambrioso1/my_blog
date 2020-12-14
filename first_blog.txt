@@ -1,0 +1,9 @@
+This is a simple blog based on an example found here Flask-Blogging.
+
+It is basically the quick start example shown in the Flask-Blogging documentation. The app runs on a Linux virtually machine, Ubuntu 18.04, hosted by Digital Ocean. The application uses a uWSGI backend server and Nginx as the front-end proxy server.
+
+My code for the application can be on my GitHub page here My Blog.
+
+I would like to build it up by adding proper login features and giving it a nicer look using the Bootstrap CSS framework.
+
+If you have an questions or comments please contact me at aambrioso1@gmail.com.
