@@ -70,7 +70,7 @@ def index():
     # return render_template_string(index_template)
 
 @app.route("/login/<name>")
-def login():
+def login(name):
     if name == 'Alex' or 'alex':
         user = User(name)
         login_user(user)
