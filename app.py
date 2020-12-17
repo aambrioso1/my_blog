@@ -71,7 +71,7 @@ def index():
 
 @app.route("/login/")
 def login(name):
-        user = User("testuser")
+    user = User("testuser")
     login_user(user)
     return redirect("/blog")
 
