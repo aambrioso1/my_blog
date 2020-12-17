@@ -69,7 +69,13 @@ def index():
     return redirect("/blog")
     # return render_template_string(index_template)
 
-@app.route("/login/<name>")
+@app.route("/login/")
+def login(name):
+        user = User("testuser")
+    login_user(user)
+    return redirect("/blog")
+
+    """
 def login(name):
     if name == 'Alex' or 'alex':
         user = User(name)
@@ -77,6 +83,7 @@ def login(name):
         return redirect("/blog")
     else:
         return redirect("/blog")
+    """
 
 @app.route("/logout/")
 def logout():
