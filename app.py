@@ -43,8 +43,14 @@ def load_user(user_id):
 index_template = """
 <!DOCTYPE html>
 <html>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>Alex's Blog</title>
     <head> </head>
+
     <body>
+
         {% if current_user.is_authenticated %}
             <a href="/logout/"> Logout </a>
         {% else %}
@@ -60,7 +66,8 @@ index_template = """
 
 @app.route("/")
 def index():
-    return render_template_string(index_template)
+    return redirect("/blog")
+    # return render_template_string(index_template)
 
 @app.route("/login/")
 def login():
@@ -73,9 +80,11 @@ def logout():
     logout_user()
     return redirect("/")
 
-# This main function is need to get wsgi.py to work properly.
+# This main function is needed to get wsgi to work properly with my deployment method.
+# Need confirm this.
 def main():
     app.run(debug=True, port=5000)
 
+#  Included so we can also run the app using flask run.
 if __name__ == "__main__":
     app.run(debug=True, port=5000, use_reloader=True)
