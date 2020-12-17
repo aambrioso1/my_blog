@@ -75,15 +75,15 @@ def login(name):
     login_user(user)
     return redirect("/blog")
 
-    """
-def login(name):
-    if name == 'Alex' or 'alex':
-        user = User(name)
-        login_user(user)
-        return redirect("/blog")
-    else:
-        return redirect("/blog")
-    """
+
+# def login(name):
+#     if name == 'Alex' or 'alex':
+#         user = User(name)
+#         login_user(user)
+#         return redirect("/blog")
+#     else:
+#         return redirect("/blog")
+
 
 @app.route("/logout/")
 def logout():
