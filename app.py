@@ -71,8 +71,8 @@ def index():
 
 @app.route("/login/<name>")
 def login():
-    user = User(name)
-    login_user(user)    
+    # user = User(name)
+    # login_user(user)    
     if name == 'Alex' or 'alex':
         return redirect("/")
     else:
