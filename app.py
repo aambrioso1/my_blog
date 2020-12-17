@@ -70,7 +70,7 @@ def index():
     # return render_template_string(index_template)
 
 @app.route("/login/")
-def login(name):
+def login():
     user = User("testuser")
     login_user(user)
     return redirect("/blog")
