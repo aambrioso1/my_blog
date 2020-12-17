@@ -71,14 +71,12 @@ def index():
 
 @app.route("/login/<name>")
 def login():
-    user = User(name)
-    login_user(user)    
-    """
     if name == 'Alex' or 'alex':
+        user = User(name)
+        login_user(user)
         return redirect("/")
     else:
-        return redirect("/blog")
-    """
+        return redirect("/")
 
 @app.route("/logout/")
 def logout():
