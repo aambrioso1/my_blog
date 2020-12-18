@@ -1,3 +1,8 @@
+# Three thing I would like to do with this:
+# (1)  Make a properly authenticated login for a single user. Look at the LoginManager docs.
+# (2)  Display all the POSTS on one page rather than all the links.
+# (3)  Find a way to include comments without using Disqus.
+
 from flask import Flask, render_template_string, redirect
 from sqlalchemy import create_engine, MetaData
 from flask_login import UserMixin, LoginManager, login_user, logout_user
@@ -40,7 +45,7 @@ class User(UserMixin):
 def load_user(user_id):
     return User(user_id)
 
-index_template = """
+index_template1 = """
 <!DOCTYPE html>
 <html>
 
@@ -64,33 +69,58 @@ index_template = """
 </html>
 """
 
+index_template2 = """
+<!DOCTYPE html>
+<html>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>Alex's Blog</title>
+    <head> </head>
+
+    <body>
+
+        &nbsp&nbsp<a href="/blog/"> Blog </a>
+        &nbsp&nbsp<a href="/blog/sitemap.xml">Sitemap</a>
+        &nbsp&nbsp<a href="/blog/feeds/all.atom.xml">ATOM</a>
+        &nbsp&nbsp<a href="/fileupload/">FileUpload</a>
+    
+    </body>
+</html>
+"""
+
 @app.route("/")
 def index():
+    print('inside index')
     return redirect("/blog")
-    # return render_template_string(index_template)
 
-@app.route("/login/<name>")
+@app.route("/login/<string:name>")
 def login(name):
-     if name == 'Alex' or 'alex':
-         user = User(name)
-         login_user(user)
-         return redirect("/")
-     else:
-         return redirect("/")
-
-# def login(name):
-#    user = User(name)
-#    login_user(user)
-#    return redirect("/")
-
+    name.lower()
+    user = User(name)
+    print(f"inside login: name = {name}")
+    if name == 'alex':
+        print('inside if, inside login')
+        login_user(user)
+        return redirect("/blog/")
+    else:
+        print('inside else, inside login')
+        logout_user()
+        return redirect("/blog/")
 
 @app.route("/logout/")
 def logout():
+    print('inside logout')
     logout_user()
-    return redirect("/")
+    return redirect("/blog/")
+
+@app.route("/blog/testing/")
+def testing():
+    print("inside testing")
+    return render_template_string(index_template2)
 
 # This main function is needed to get wsgi to work properly with my deployment method.
-# Need confirm this.
+# Need confirm this fact.
 def main():
     app.run(debug=True, port=5000)
 
