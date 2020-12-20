@@ -2,6 +2,8 @@
 
 # Consider running these two commands separately
 # Do a reboot before continuing.
+# To set environmental variables add to the end of this file.
+# nano .zshrc
 
 """
 apt update
