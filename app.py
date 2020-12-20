@@ -24,9 +24,9 @@ app.config["FILEUPLOAD_PREFIX"] = "/fileupload"
 app.config["FILEUPLOAD_ALLOWED_EXTENSIONS"] = ["png", "jpg", "jpeg", "gif"]
 
 # This configuration will make the app less hackable.
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
+app.config["ADMIN_PASSWORD"] = os.environ.get('ADMIN_PASSWORD')
 
-print(f'ADMIN_PASSWORD = {ADMIN_PASSWORD} with type = {type(ADMIN_PASSWORD)}')
+print(f'ADMIN_PASSWORD = {app.config["ADMIN_PASSWORD"]} with type = {type(app.config["ADMIN_PASSWORD"])}')
 
 # extensions
 db_file = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
@@ -103,7 +103,7 @@ def index():
 def login(name):
     user = User(name)
     print(f"inside login: name = {name}")
-    if name == ADMIN_PASSWORD:
+    if name == app.config["ADMIN_PASSWORD"]:
         print('inside if, inside login')
         login_user(user)
         return redirect("/blog/")
