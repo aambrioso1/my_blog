@@ -136,7 +136,7 @@ def logout():
 @app.route("/blog/testing/<string:text>")
 def testing(text):
     print("inside testing")
-    return f'The input text = { text }'
+    return f'The input text is { text }'
     # return index_template3
 
 # This main function is needed to get wsgi to work properly with my deployment method.
