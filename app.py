@@ -24,9 +24,7 @@ app.config["FILEUPLOAD_PREFIX"] = "/fileupload"
 app.config["FILEUPLOAD_ALLOWED_EXTENSIONS"] = ["png", "jpg", "jpeg", "gif"]
 
 # This configuration will make the app less hackable.
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
-
-print(f'ADMIN_PASSWORD = {ADMIN_PASSWORD} with type = {type(ADMIN_PASSWORD)}')
+app.config["ADMIN_PASSWORD"] = os.environ.get("ADMIN_PASSWORD")
 
 # extensions
 db_file = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
@@ -36,7 +34,7 @@ sql_storage = SQLAStorage(engine, metadata=meta)
 blog_engine = BloggingEngine(app, sql_storage)
 login_manager = LoginManager(app)
 meta.create_all(bind=engine)
-
+    
 class User(UserMixin):
     def __init__(self, user_id):
         self.id = user_id
@@ -96,6 +94,21 @@ index_template2 = """
 </html>
 """
 
+index_template3="""
+<!DOCTYPE html>
+<html>
+    
+    <style>
+        h1 {text-align: center;}
+    </style>
+
+    <body>
+        <h1>The input text is {{ text }} </h1>
+    </body>
+
+</html>
+"""
+
 @app.route("/")
 def index():
     print('inside index')
@@ -105,7 +118,7 @@ def index():
 def login(name):
     user = User(name)
     print(f"inside login: name = {name}")
-    if name == ADMIN_PASSWORD:
+    if name == app.config["ADMIN_PASSWORD"]:
         print('inside if, inside login')
         login_user(user)
         return redirect("/blog/")
@@ -120,12 +133,11 @@ def logout():
     logout_user()
     return redirect("/blog/")
 
-@app.route("/blog/testing/<string:name>")
-def testing(name):
+@app.route("/blog/testing/<string:text>")
+def testing(text):
     print("inside testing")
-    text = os.environ.get('ADMIN_PASSWORD')
-    return f'<h1>text = { text } </h1>'
-    # return render_template_string(index_template2)
+    return f'The input text = { text }'
+    # return index_template3
 
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
