@@ -94,6 +94,21 @@ index_template2 = """
 </html>
 """
 
+index_template3="""
+<!DOCTYPE html>
+<html>
+    
+    <style>
+        h1 {text-align: center;}
+    </style>
+
+    <body>
+        <h1>The input text is {{ text }} </h1>
+    </body>
+
+</html>
+"""
+
 @app.route("/")
 def index():
     print('inside index')
@@ -118,12 +133,11 @@ def logout():
     logout_user()
     return redirect("/blog/")
 
-@app.route("/blog/testing/<string:name>")
-def testing(name):
+@app.route("/blog/testing/<string:text>")
+def testing(text):
     print("inside testing")
-    text = os.environ.get('ADMIN_PASSWORD')
-    return f'<h1>text = { text } </h1>'
-    # return render_template_string(index_template2)
+    return f'The input text = { text }'
+    # return index_template3
 
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
