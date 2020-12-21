@@ -76,19 +76,22 @@ index_template1 = """
 index_template2 = """
 <!DOCTYPE html>
 <html>
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <title>Alex's Blog</title>
-    <head> </head>
-
     <body>
+        
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+            
+        <title>Alex's Blog</title>
+            <head>
 
-        &nbsp&nbsp<a href="/blog/"> Blog </a>
-        &nbsp&nbsp<a href="/blog/sitemap.xml">Sitemap</a>
-        &nbsp&nbsp<a href="/blog/feeds/all.atom.xml">ATOM</a>
-        &nbsp&nbsp<a href="/fileupload/">FileUpload</a>
-    
+            
+
+                &nbsp&nbsp<a href="/blog/"> Blog </a>
+                &nbsp&nbsp<a href="/blog/sitemap.xml">Sitemap</a>
+                &nbsp&nbsp<a href="/blog/feeds/all.atom.xml">ATOM</a>
+                &nbsp&nbsp<a href="/fileupload/">FileUpload</a>
+                
+            </head>
     </body>
 </html>
 """
@@ -117,10 +120,12 @@ def logout():
     logout_user()
     return redirect("/blog/")
 
-@app.route("/blog/testing/")
-def testing():
+@app.route("/blog/testing/<string:name>")
+def testing(name):
     print("inside testing")
-    return render_template_string(index_template2)
+    text = os.environ.get('ADMIN_PASSWORD')
+    return f'<h1>text = { text } </h1>'
+    # return render_template_string(index_template2)
 
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
