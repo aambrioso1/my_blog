@@ -118,7 +118,7 @@ def index():
 def login(name):
     user = User(name)
     print(f"inside login: name = {name}")
-    if name == app.config["ADMIN_PASSWORD"] or name == "testuser" or name == "alex" :
+    if (name == app.config["ADMIN_PASSWORD"]) or (name == "testuser") or (name == "alex") :
         print('inside if, inside login')
         login_user(user)
         return redirect("/blog/")
