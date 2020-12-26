@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% if task == 'content1_first' %}
+	{% include url_for("blogging.page_by_id", postid="test-blog-2", slug="2") %}
+    {% include url_for("blogging.page_by_id", postid="test-blog", slug="1") %}
+{% endif %}
+
+{% if task == 'content2_first' %}
+    {% include 'content2.html' %}
+    {% include 'content1.html' %}
+{% endif %}

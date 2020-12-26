@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<h1>Index<h1>
+<h2>Blog Posts</h2>
+
+{% for post in get_posts() %}
+<div>
+    <span class="title">
+        {{ post[title] }}
+    </span>
+</div>
+{% endfor %}
+
+{% endblock %}
