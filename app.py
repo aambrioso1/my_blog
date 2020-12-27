@@ -57,7 +57,6 @@ index_template1 = """
     <head> </head>
 
     <body>
-
         {% if current_user.is_authenticated %}
             <a href="/logout/"> Logout </a>
         {% else %}
@@ -81,9 +80,7 @@ index_template2 = """
             
         <title>Alex's Blog</title>
             <head>
-
-            
-
+    
                 &nbsp&nbsp<a href="/blog/"> Blog </a>
                 &nbsp&nbsp<a href="/blog/sitemap.xml">Sitemap</a>
                 &nbsp&nbsp<a href="/blog/feeds/all.atom.xml">ATOM</a>
@@ -109,34 +106,58 @@ index_template3="""
 </html>
 """
 
+# This route goes to the list of blogs
 @app.route("/")
-def index():
-    print('inside index')
+def blog():
+    print('inside blog')
     return redirect("/blog/")
 
-@app.route("/login/<string:name>")
+# This route goes to the index page
+@app.route("/index/")
+def index():
+    return render_template_string(index_template1)
+
+# This route is to allow the administator to login
+@app.route("/login/<name>")
 def login(name):
+    # A user will be created but only administrator can login
     user = User(name)
     print(f"inside login: name = {name}")
+    # A couple of the earlier blogs have the listed user names.
     if (name == app.config["ADMIN_PASSWORD"]) or (name == "testuser") or (name == "alex") :
-        print('inside if, inside login')
+        print(f'inside login, inside if, and logged in')
         login_user(user)
         return redirect("/blog/")
     else:
-        print('inside else, inside login')
+        print('inside login, inside else, and logged out')
         logout_user()
         return redirect("/blog/")
 
+# This route is to allow the administator to login
+@app.route("/login/")
+def login_():
+    print(f'inside login_')
+    return redirect("/index/") 
+
+# This route is used to log out current user
 @app.route("/logout/")
 def logout():
     print('inside logout')
     logout_user()
     return redirect("/blog/")
 
+# This route is for testing
 @app.route("/blog/testing/<string:text>")
 def testing(text):
     print("inside testing")
-    return f'The input text is { text }'
+    return f'The input text is { text }.'
+    # return index_template3
+
+# This route iintended for fileupload
+@app.route("/login/")
+def fake_login():
+    print("inside fake_login")
+    return f'This is the login route.   It is not implemented.'
     # return index_template3
 
 # This main function is needed to get wsgi to work properly with my deployment method.
