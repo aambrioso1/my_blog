@@ -163,8 +163,8 @@ def fake_login():
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
 def main():
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5002)
 
 #  Included so we can also run the app using flask run.
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, use_reloader=True)
+    app.run(debug=True, port=5002, use_reloader=True)
