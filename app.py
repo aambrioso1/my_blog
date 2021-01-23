@@ -3,7 +3,7 @@
 # (2)  Display all the POSTS on one page rather than all the links.
 # (3)  Find a way to include comments without using Disqus.
 
-from flask import Flask, render_template_string, redirect
+from flask import Flask, render_template_string, redirect, render_template
 from sqlalchemy import create_engine, MetaData
 from flask_login import UserMixin, LoginManager, login_user, logout_user
 from flask_blogging import SQLAStorage, BloggingEngine
@@ -159,6 +159,10 @@ def fake_login():
     print("inside fake_login")
     return f'This is the login route.   It is not implemented.'
     # return index_template3
+
+@app.route("/mom/")
+def mom():
+    return render_template('mom.html')
 
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
