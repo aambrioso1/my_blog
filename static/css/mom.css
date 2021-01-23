@@ -12,7 +12,15 @@ body{
 	margin:40px;
 }
 
+title{
+	padding:40px;
+}
+
+h1{
+	text-align:center;
+}
+
 .container{
-	width:50%;
-	margin:50px;
+	width:60%;
+	margin:30px;
 }
