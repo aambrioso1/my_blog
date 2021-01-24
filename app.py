@@ -10,7 +10,6 @@ from flask_blogging import SQLAStorage, BloggingEngine
 
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-image_folder = os.path.join('static', 'img')
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret"  # for WTF-forms and login
@@ -23,7 +22,6 @@ app.config["BLOGGING_KEYWORDS"] = ["blog", "meta", "keywords"]
 app.config["FILEUPLOAD_IMG_FOLDER"] = "fileupload"
 app.config["FILEUPLOAD_PREFIX"] = "/fileupload"
 app.config["FILEUPLOAD_ALLOWED_EXTENSIONS"] = ["png", "jpg", "jpeg", "gif"]
-app.config['image_folder'] = image_folder
 
 # This configuration will make the app less hackable.
 app.config["ADMIN_PASSWORD"] = os.environ.get("ADMIN_PASSWORD")
@@ -164,8 +162,7 @@ def fake_login():
 
 @app.route("/mom/")
 def mom():
-    full_filename=os.path.join(app.config['image_folder'])
-    return render_template('mom.html', user_image = full_filename)
+    return render_template('mom.html')
 
 # This main function is needed to get wsgi to work properly with my deployment method.
 # Need confirm this fact.
