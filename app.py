@@ -11,7 +11,7 @@ from flask_blogging import SQLAStorage, BloggingEngine
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = "/static", static_folder = "static") #,  static_url_path= "", static_folder = "img")
 app.config["SECRET_KEY"] = "secret"  # for WTF-forms and login
 app.config["BLOGGING_URL_PREFIX"] = "/blog"
 # Leaving this configuration out removes the comment section AND the sponsored ads!
