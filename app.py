@@ -107,12 +107,12 @@ index_template3="""
 """
 
 # This route goes to the list of blogs
-"""
+
 @app.route("/")
 def blog():
     print('inside blog')
     return redirect("/blog/")
-"""
+
 # This route goes to the index page
 @app.route("/index/")
 def index():
@@ -161,7 +161,7 @@ def fake_login():
     return f'This is the login route.   It is not implemented.'
     # return index_template3
 
-@app.route("/")
+@app.route("/mom/", methods=['GET', 'POST'])
 def mom():
     return render_template('mom.html')
 
