@@ -108,7 +108,7 @@ index_template3="""
 
 # This route goes to the list of blogs
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def blog():
     print('inside blog')
     return redirect("/blog/")
