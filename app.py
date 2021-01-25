@@ -11,7 +11,7 @@ from flask_blogging import SQLAStorage, BloggingEngine
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__, static_url_path = "/static", static_folder = "static") #,  static_url_path= "", static_folder = "img")
+app = Flask(__name__) #,  static_url_path= "", static_folder = "img")
 app.config["SECRET_KEY"] = "secret"  # for WTF-forms and login
 app.config["BLOGGING_URL_PREFIX"] = "/blog"
 # Leaving this configuration out removes the comment section AND the sponsored ads!
@@ -75,8 +75,8 @@ index_template2 = """
 <html>
     <body>
         
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
             
         <title>Alex's Blog</title>
             <head>
@@ -107,11 +107,12 @@ index_template3="""
 """
 
 # This route goes to the list of blogs
+"""
 @app.route("/")
 def blog():
     print('inside blog')
     return redirect("/blog/")
-
+"""
 # This route goes to the index page
 @app.route("/index/")
 def index():
@@ -160,7 +161,7 @@ def fake_login():
     return f'This is the login route.   It is not implemented.'
     # return index_template3
 
-@app.route("/mom/")
+@app.route("/")
 def mom():
     return render_template('mom.html')
 
